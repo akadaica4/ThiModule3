@@ -1,0 +1,55 @@
+﻿@model Cakes_Management.Models.Cake.CreateCake
+
+@{
+    ViewData["Title"] = "Create";
+    var category = ViewBag.Category as Cakes_Management.Entities.Category;
+}
+<h1>@category.CategoryName &gt; Create</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CakeName" class="control-label"></label>
+                <input asp-for="CakeName" class="form-control" />
+                <span asp-validation-for="CakeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ingredient" class="control-label"></label>
+                <input asp-for="Ingredient" class="form-control" />
+                <span asp-validation-for="Ingredient" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Expiry" class="control-label"></label>
+                <input asp-for="Expiry" class="form-control" />
+                <span asp-validation-for="Expiry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfManufacture" class="control-label"></label>
+                <input asp-for="DateOfManufacture" class="form-control" />
+                <span asp-validation-for="DateOfManufacture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-outline-secondary" asp-controller="Cake" asp-action="Index" asp-route-catId="@category.CategoryId">
+                    <i class="fa fa-backward"> Back to List</i>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Cakes_Management.Entities.Cake>
+
+@{
+    ViewData["Title"] = "Index";
+    var category = ViewBag.Category as Cakes_Management.Entities.Category;
+}
+
+<h1>@category.CategoryName</h1>
+
+ <p>
+     <a class="btn btn-primary" asp-action="Create">
+         <i class="fa fa-plus"> Create</i>
+     </a>
+     <a class="btn btn-outline-secondary" asp-controller="Category" asp-action="Index">
+         <i class="fa fa-backward"> Back to category</i>
+     </a>
+ </p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cakeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CakeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ingredient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Expiry)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfManufacture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cakeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CakeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Expiry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfManufacture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-success btn-sm text-white" asp-controller="Cake" asp-action="Edit" asp-route-cakeId="@item.cakeId">
+                    Edit
+                </a>
+                <a class="btn btn-warning btn-sm text-white" asp-controller="Cake" asp-action="Detail" asp-route-cakeId="@item.cakeId">
+                    Detail
+                </a>
+                @if (item.Status)
+                {
+                    <a asp-controller="Cake" asp-action="ChangeStatus" asp-route-cakeId="@item.cakeId" class="btn btn-secondary btn-sm">
+                        Đã Xóa
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Cake" asp-action="ChangeStatus" asp-route-cakeId="@item.cakeId" class="btn btn-primary btn-sm">
+                        Đang Bán
+                    </a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
